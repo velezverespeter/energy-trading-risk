@@ -8,7 +8,7 @@ Selection project prepared by **Peter Velez Vereš** as part of the application 
 
 ## Povzetek (SI)
 
-Projekt analizira tri ključna tveganja trgovca z električno energijo: tržno, likvidnostno in kreditno. Na podlagi javno dostopnih urnih cen slovenskega dnevnega trga za obdobje 2021–2025 obravnava hipotetično pozicijo nakupa 10 MW električne energije in ocenjuje, koliko lahko podjetje izgubi zaradi gibanja cen, koliko gotovine potrebuje za borzne varščine in kolikšna je izpostavljenost do nasprotne stranke.
+Projekt analizira tri ključna tveganja trgovca z električno energijo: tržno, likvidnostno in kreditno. Na podlagi javno dostopnih urnih cen slovenskega dnevnega trga za obdobje 2021–2025 obravnava hipotetično pozicijo nakupa 10 MW električne energije in ocenjuje, koliko lahko podjetje izgubi zaradi gibanja cen, koliko sredstev potrebuje za borzne varščine in kolikšna je izpostavljenost do nasprotne stranke.
 
 Glavne ugotovitve: tveganje se skozi čas močno spreminja (VaR v letu 2022 je bil 2,6-krat višji kot v mirnih letih), predpostavka normalne porazdelitve podcenjuje ekstremne izgube, že majhna borzna pozicija lahko v enem mesecu zahteva več kot 10 milijonov EUR gotovine za varščine, kreditna izpostavljenost pa je največja takrat, ko je razlika med tržno in pogodbeno ceno velika in je v pogodbi še veliko nedobavljene količine.
 
