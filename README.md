@@ -76,6 +76,13 @@ For detailed explanations of the methods and findings, see the [Questions and An
 
 ![Credit exposure to bilateral counterparty](figures/credit_exposure.png)
 
+## Implications for risk management
+
+- **Risk measures should adapt to changing conditions.** A model that weights recent data more heavily, combined with regular stress testing, would capture the build-up of risk in late 2021 earlier than a static historical window.
+- **Tail risk deserves its own measure.** Since normal-distribution VaR understates the most extreme losses, measures such as Expected Shortfall or historical stress scenarios (e.g. August 2022) give a more complete picture.
+- **Liquidity planning must account for margining.** Cash buffers or credit lines should be sized against stressed margin requirements, not against market risk alone.
+- **Credit exposure should be monitored over the contract's lifetime.** Exposure can peak long before delivery, so credit limits and collateral requirements need to be reviewed as prices move.
+
 ## Data
 
 | | |
@@ -117,6 +124,14 @@ Data was checked for duplicate hours, missing hours and missing prices. Times we
 - The first day of the sample (1 January 2021) contains 23 hours due to the UTC to local time conversion.
 - The counterparty is hypothetical; probability of default and loss given default are assumptions, not estimates.
 - Initial margin, volume risk, liquidity costs and portfolio diversification effects are not modelled.
+
+## Possible extensions
+
+- EWMA or GARCH volatility models and Expected Shortfall as alternatives to historical VaR
+- Formal statistical backtesting tests, such as the Kupiec test
+- Real futures prices from EEX instead of the day-ahead proxy
+- Peak and hourly profile positions, including shape risk and the impact of negative prices on solar generation
+- Monte Carlo simulation for potential future exposure
 
 ## Repository structure
 
