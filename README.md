@@ -152,7 +152,7 @@ Python · pandas · NumPy · matplotlib · Jupyter / Google Colab · Git · VS C
 
 This project was developed with the help of AI tools:
 
-- **GitHub Copilot** in VS Code for code suggestions and autocompletion
+- **Copilot** for code suggestions and autocompletion
 - **Claude (Anthropic)** for explanations of Python, statistical and risk management concepts, code review, and help with project structure and documentation
 
 The code was written with substantial AI assistance, as my programming experience is still developing. The choice of methods and the interpretation of results reflect my own understanding, which I continue to deepen.
