@@ -74,4 +74,94 @@ For detailed explanations of the methods and findings, see the [Questions and An
 
 **Counterparty quality is decisive.** With an average exposure of 3.7 million EUR and an assumed LGD of 60%, the expected loss is about 3,300 EUR for a BBB-rated counterparty and about 66,700 EUR for a B-rated counterparty. This illustrates why weaker counterparties typically require collateral or lower credit limits.
 
-![Credit exposure to
+![Credit exposure to bilateral counterparty](figures/credit_exposure.png)
+
+## Data
+
+| | |
+|---|---|
+| **Source** | [Ember, European Wholesale Electricity Price Data](https://ember-energy.org/data/european-wholesale-electricity-price-data), based on the [ENTSO-E Transparency Platform](https://transparency.entsoe.eu/) |
+| **Market** | Day-ahead prices, Slovenia |
+| **Period** | 1 January 2021 – 31 December 2025 |
+| **Resolution** | Hourly (43,824 hours, no missing values) |
+| **Licence** | CC BY 4.0 |
+
+Data was validated against a sample exported directly from the ENTSO-E Transparency Platform. Default probabilities are approximate long-run averages based on S&P Global Ratings default studies.
+
+## Methodology
+
+### Data preparation
+Data was checked for duplicate hours, missing hours and missing prices. Times were kept in UTC to avoid daylight-saving shifts, then converted to local time (Europe/Ljubljana) to build daily base (all hours) and peak (weekdays 08:00–20:00) averages.
+
+### Market risk
+- Daily changes in base price, measured in EUR/MWh rather than percentages, since prices can be close to zero or negative
+- 30-day rolling volatility
+- Historical and normal-distribution **Value-at-Risk** at 95% and 99%
+- **Backtesting** with a 250-day rolling window, using only information available up to the previous day
+
+### Liquidity risk
+- Daily **variation margin** on a 5 MW one-year futures position
+- Rolling 7-day and 30-day cumulative cash flows
+- **Liquidity-at-Risk** at 95% and 99%
+
+### Credit risk
+- **Replacement cost exposure** of a bilateral forward contract, accounting for declining remaining volume during delivery
+- **Potential future exposure** based on the 95th percentile of historical 30-day price increases
+- **Expected loss**: EL = PD × LGD × EAD
+
+## Assumptions and limitations
+
+- Historical futures prices for the Slovenian market are not publicly available; a 30-day rolling average of day-ahead prices is used as a proxy for the forward price.
+- Historical methods assume that past price changes are representative of future risk, which does not hold during structural changes such as the 2022 crisis. Models giving more weight to recent data (e.g. EWMA or GARCH) would react faster.
+- Ember interpolates occasional missing values from neighbouring hours.
+- The first day of the sample (1 January 2021) contains 23 hours due to the UTC to local time conversion.
+- The counterparty is hypothetical; probability of default and loss given default are assumptions, not estimates.
+- Initial margin, volume risk, liquidity costs and portfolio diversification effects are not modelled.
+
+## Repository structure
+
+```
+energy-trading-risk/
+├── data/               # raw and cleaned price data
+├── notebooks/
+│   ├── 01_data_preparation.ipynb
+│   ├── 02_market_risk.ipynb
+│   ├── 03_liquidity_risk.ipynb
+│   └── 04_credit_risk.ipynb
+├── figures/            # charts used in this README
+├── QA.md               # questions and answers on methods and findings
+├── requirements.txt    # Python dependencies
+└── README.md
+```
+
+## How to reproduce
+
+```bash
+git clone https://github.com/velezverespeter/energy-trading-risk.git
+cd energy-trading-risk
+pip install -r requirements.txt
+```
+
+Then run the notebooks in `notebooks/` in numerical order. The notebooks were developed in Google Colab; when running them there, upload the required data file from the `data/` folder first.
+
+## Tools
+
+Python · pandas · NumPy · matplotlib · Jupyter / Google Colab · Git · VS Code
+
+## Use of AI
+
+This project was developed with the help of AI tools:
+
+- **GitHub Copilot** in VS Code for code suggestions and autocompletion
+- **Claude (Anthropic)** for explanations of Python, statistical and risk management concepts, code review, and help with project structure and documentation
+
+The code was written with substantial AI assistance, as my programming experience is still developing. The choice of methods and the interpretation of results reflect my own understanding, which I continue to deepen.
+
+## Disclaimer
+
+This is an independent project. It is not affiliated with, endorsed by, or based on any internal data or methods of GEN-I or any other company.
+
+## Author
+
+**Peter Velez Vereš**
+[peter.velez.veres@gmail.com](mailto:peter.velez.veres@gmail.com) · [LinkedIn](https://www.linkedin.com/in/velezverespeter) · [GitHub](https://github.com/velezverespeter)
